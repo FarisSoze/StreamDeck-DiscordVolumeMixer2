@@ -47,7 +47,11 @@ test('native plugin handles startup devices and repeated lifecycle events withou
                 }
                 if (inspectorBody && message.event === 'sendToPropertyInspector' && message.payload.cmd === 'updateDiscordConnection') {
                     states.push(message.payload);
-                    if (message.payload.state === 'error' && states.some(s => s.state === 'connecting')) resolve(inspectorBody);
+                    if (message.payload.state === 'error' && states.some(s => s.state === 'connecting')) {
+                        // Capture this completed attempt: a second queued click
+                        // can publish a new connecting state before await resumes.
+                        resolve({ body: inspectorBody, failure: message.payload, states: states.slice() });
+                    }
                 }
             });
         });
@@ -56,14 +60,15 @@ test('native plugin handles startup devices and repeated lifecycle events withou
         child.once('error', reject);
         child.once('exit', code => reject(Error(`Plugin exited before replying: ${code}`)));
     });
-    const response = await result;
+    const completed = await result;
+    const response = completed.body;
     assert.equal(response.context, 'test-action');
     assert.equal(response.payload.cmd, 'updateBody');
     assert.match(response.payload.content, /Discord settings/);
     assert.match(response.payload.content, /client_id/);
     assert.match(response.payload.content, /id="discordReconnect"/);
     assert.match(response.payload.content, /إعادة الاتصال/);
-    assert.ok(states.some(s => s.state === 'connecting'));
-    assert.match(states.at(-1).reason, /Client ID/);
+    assert.ok(completed.states.some(s => s.state === 'connecting'));
+    assert.match(completed.failure.reason, /Client ID/);
     assert.equal(child.exitCode, null, 'Reconnect must keep the same native process alive');
 });
