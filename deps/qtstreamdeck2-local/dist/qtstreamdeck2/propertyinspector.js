@@ -46,6 +46,17 @@ function requestPropertyInspector() {
 }
 
 const commandFunctions = {
+    updateDiscordConnection: function (msg) {
+        const label = document.getElementById("discordConnectionLabel");
+        const reason = document.getElementById("discordConnectionReason");
+        const button = document.getElementById("discordReconnect");
+        if (!label || !reason || !button) return;
+        label.textContent = msg.state === "connected" ? "متصل"
+            : msg.state === "connecting" ? "جاري الاتصال…" : "تعذّر الاتصال";
+        reason.textContent = typeof msg.reason === "string" ? msg.reason : "";
+        reason.hidden = !reason.textContent;
+        button.disabled = msg.state === "connecting";
+    },
     updateBody: function (msg) {
         if (typeof msg.content !== "string") return;
         document.getElementById("body").innerHTML = msg.content;
@@ -111,6 +122,17 @@ function notifyValueChanged(elementID, value) {
         action: actionInfo.action,
         payload: { cmd: "valueChanged", element: elementID, value: value },
     });
+}
+
+function reconnectDiscord() {
+    if (sendToStreamDeck({
+        event: "sendToPlugin", context: uuid, action: actionInfo.action,
+        payload: { cmd: "reconnectDiscord" },
+    })) {
+        commandFunctions.updateDiscordConnection({ state: "connecting", reason: "" });
+    } else {
+        setConnectionStatus("تعذّر التواصل مع Stream Deck. انتظر استعادة الاتصال ثم حاول مجددًا.");
+    }
 }
 
 function openUrl(url) {

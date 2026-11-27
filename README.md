@@ -1,6 +1,12 @@
 # Maintenance fork
 
-This fork maintains Danol's Discord Volume Mixer. Version **2.0.1.10** fixes
+This fork maintains Danol's Discord Volume Mixer. Version **2.0.1.11** adds live
+Arabic connection status and an explanation when connection fails, with a
+reconnect button at the top of the inspector. Reconnecting keeps Stream Deck
+running, preserves settings, and prevents overlapping attempts. Status updates
+do not rebuild the form or interrupt editing.
+
+Version **2.0.1.10** fixes
 the property inspector getting stuck at `Loading property inspector...` and
 avoids refreshing a valid Discord access token on every reconnect.
 

@@ -18,6 +18,7 @@ public:
 public slots:
 	/// Attempts to connect to Discord
 	void connectToDiscord();
+	void reconnectToDiscord();
 
 	/// Reloads all channel member data
 	void updateChannelMembersData();
@@ -29,6 +30,9 @@ public:
 	void adjustVoiceChannelMemberVolume(VoiceChannelMember &vcm, float stepSize, int numSteps);
 
 public:
+	QString connectionState() const { return connectionState_; }
+	QString connectionReason() const { return connectionReason_; }
+
 	QDiscord discord;
 
 public:
@@ -43,11 +47,13 @@ public:
 	bool isMicrophoneMuted = false;
 
 signals:
+	void connectionStatusChanged();
 	/// Updates text & states of all user related buttons
 	void buttonsUpdateRequested();
 
 private:
 	void updateCurrentVoiceChannel(const QString &newVoiceChannel);
+	void setConnectionStatus(const QString &state, const QString &reason = {});
 
 private slots:
 	void onInitialized();
@@ -56,6 +62,9 @@ private slots:
 
 private:
 	bool discordConnectionInProgress_ = false;
+	bool discordReconnectScheduled_ = false;
+	QString connectionState_ = "connecting";
+	QString connectionReason_;
 	QTimer discordConnectTimeoutTimer_;
 	QTimer discordReconnectTimer_;
 

@@ -13,6 +13,8 @@ test('native plugin handles startup devices and repeated lifecycle events withou
     await new Promise(resolve => server.once('listening', resolve));
     const cwd = await mkdtemp(join(tmpdir(), 'dvm-protocol-'));
     let child;
+    let inspectorBody;
+    const states = [];
     t.after(async () => {
         child?.kill();
         for (const client of server.clients) client.terminate();
@@ -37,7 +39,16 @@ test('native plugin handles startup devices and repeated lifecycle events withou
                     // must recover the body even when that notification is lost.
                     send({ event: 'sendToPlugin', context: 'test-action', action: 'cz.danol.discordmixer.openmixer', payload: { cmd: 'requestPropertyInspector' } });
                 }
-                if (message.event === 'sendToPropertyInspector') resolve(message);
+                if (message.event === 'sendToPropertyInspector' && message.payload.cmd === 'updateBody' && !inspectorBody) {
+                    inspectorBody = message;
+                    send({ event: 'sendToPlugin', context: 'test-action', action: 'cz.danol.discordmixer.openmixer', payload: { cmd: 'reconnectDiscord' } });
+                    // A double click must not start overlapping handshakes.
+                    send({ event: 'sendToPlugin', context: 'test-action', action: 'cz.danol.discordmixer.openmixer', payload: { cmd: 'reconnectDiscord' } });
+                }
+                if (inspectorBody && message.event === 'sendToPropertyInspector' && message.payload.cmd === 'updateDiscordConnection') {
+                    states.push(message.payload);
+                    if (message.payload.state === 'error' && states.some(s => s.state === 'connecting')) resolve(inspectorBody);
+                }
             });
         });
         const startupInfo = { devices: [{ id: 'test-device', type: 7, size: { columns: 4, rows: 2 } }] };
@@ -50,4 +61,9 @@ test('native plugin handles startup devices and repeated lifecycle events withou
     assert.equal(response.payload.cmd, 'updateBody');
     assert.match(response.payload.content, /Discord settings/);
     assert.match(response.payload.content, /client_id/);
+    assert.match(response.payload.content, /id="discordReconnect"/);
+    assert.match(response.payload.content, /إعادة الاتصال/);
+    assert.ok(states.some(s => s.state === 'connecting'));
+    assert.match(states.at(-1).reason, /Client ID/);
+    assert.equal(child.exitCode, null, 'Reconnect must keep the same native process alive');
 });

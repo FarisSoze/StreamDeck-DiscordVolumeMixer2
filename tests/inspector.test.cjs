@@ -10,6 +10,9 @@ function fixture() {
     const timers = new Map(), sockets = [], events = {};
     const body = { innerHTML: 'Loading property inspector...' };
     const status = { textContent: '', hidden: true };
+    const label = { textContent: '' }, reason = { textContent: '', hidden: true }, button = { disabled: false };
+    const elements = { body, connectionStatus: status, discordConnectionLabel: label,
+        discordConnectionReason: reason, discordReconnect: button };
     let timerID = 0;
     class Socket {
         static OPEN = 1;
@@ -21,7 +24,7 @@ function fixture() {
     }
     const context = vm.createContext({
         WebSocket: Socket,
-        document: { getElementById: id => id === 'body' ? body : status },
+        document: { getElementById: id => elements[id] || null },
         window: { addEventListener: (name, fn) => { events[name] = fn; } },
         setTimeout: (fn, delay) => { const id = ++timerID; timers.set(id, { fn, delay }); return id; },
         clearTimeout: id => timers.delete(id),
@@ -34,7 +37,7 @@ function fixture() {
     };
     const reply = socket => socket.receive({ event: 'sendToPropertyInspector', payload: { cmd: 'updateBody', content: '<input id="setting">' } });
     connect();
-    return { context, timers, sockets, body, status, events, connect, next, reply };
+    return { context, timers, sockets, body, status, label, reason, button, events, connect, next, reply };
 }
 
 test('requests the body after registration when the initial appearance notification was missed', () => {
@@ -108,4 +111,29 @@ test('reinitialization replaces the socket without creating duplicate reconnect 
     assert.equal(f.timers.size, 0);
     f.sockets[1].open(); f.reply(f.sockets[1]);
     assert.equal(f.timers.size, 0);
+});
+
+test('live Discord status updates preserve the settings form and expose the error reason safely', () => {
+    const f = fixture(), s = f.sockets[0]; s.open(); f.reply(s);
+    f.body.innerHTML = 'settings being edited';
+    s.receive({ event: 'sendToPropertyInspector', payload: { cmd: 'updateDiscordConnection', state: 'error', reason: '<open Discord>' } });
+    assert.equal(f.label.textContent, 'تعذّر الاتصال');
+    assert.equal(f.reason.textContent, '<open Discord>');
+    assert.equal(f.reason.hidden, false);
+    assert.equal(f.button.disabled, false);
+    assert.equal(f.body.innerHTML, 'settings being edited');
+    s.receive({ event: 'sendToPropertyInspector', payload: { cmd: 'updateDiscordConnection', state: 'connected', reason: '' } });
+    assert.equal(f.label.textContent, 'متصل');
+    assert.equal(f.reason.hidden, true);
+});
+
+test('reconnect requests update only connection feedback and handle a lost Stream Deck socket', () => {
+    const f = fixture(), s = f.sockets[0]; s.open(); f.reply(s);
+    f.context.reconnectDiscord();
+    assert.equal(s.sent.at(-1).payload.cmd, 'reconnectDiscord');
+    assert.equal(f.label.textContent, 'جاري الاتصال…');
+    assert.equal(f.button.disabled, true);
+    s.close();
+    assert.doesNotThrow(() => f.context.reconnectDiscord());
+    assert.match(f.status.textContent, /Stream Deck/);
 });
