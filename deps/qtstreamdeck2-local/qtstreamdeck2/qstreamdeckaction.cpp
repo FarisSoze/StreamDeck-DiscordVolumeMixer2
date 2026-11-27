@@ -13,7 +13,11 @@ QStreamDeckAction::QStreamDeckAction() {
 }
 
 QStreamDeckAction::~QStreamDeckAction() {
-	device_->plugin()->actions_.remove(actionContext_);
+	// A repeated willAppear initializes the replacement before destroying the
+	// previous action. The old destructor must not unregister the replacement.
+	auto &actions = device_->plugin()->actions_;
+	if(actions.value(actionContext_) == this)
+		actions.remove(actionContext_);
 }
 
 void QStreamDeckAction::init(QStreamDeckDevice *device, const QStreamDeckEvent &appearEvent) {

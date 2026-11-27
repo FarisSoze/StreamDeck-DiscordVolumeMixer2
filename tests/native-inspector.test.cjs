@@ -27,6 +27,10 @@ test('native plugin returns an inspector body without propertyInspectorDidAppear
                 if (message.event === 'registerPlugin') {
                     send({ event: 'deviceDidConnect', device: 'test-device', deviceInfo: { type: 7, size: { columns: 4, rows: 2 } } });
                     send({ event: 'willAppear', device: 'test-device', context: 'test-action', action: 'cz.danol.discordmixer.openmixer', payload: { settings: {}, controller: 'Keypad', coordinates: { column: 0, row: 0 } } });
+                    // Stream Deck can announce an already visible action again
+                    // during profile restoration. The old action's destructor
+                    // must not remove the replacement from the context lookup.
+                    send({ event: 'willAppear', device: 'test-device', context: 'test-action', action: 'cz.danol.discordmixer.openmixer', payload: { settings: {}, controller: 'Keypad', coordinates: { column: 0, row: 0 } } });
                     // Deliberately omit propertyInspectorDidAppear. This request
                     // must recover the body even when that notification is lost.
                     send({ event: 'sendToPlugin', context: 'test-action', action: 'cz.danol.discordmixer.openmixer', payload: { cmd: 'requestPropertyInspector' } });
