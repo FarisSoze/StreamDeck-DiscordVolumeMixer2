@@ -67,7 +67,7 @@ test('native plugin handles startup devices and repeated lifecycle events withou
     assert.match(response.payload.content, /Discord settings/);
     assert.match(response.payload.content, /client_id/);
     assert.match(response.payload.content, /id="discordReconnect"/);
-    assert.match(response.payload.content, /إعادة الاتصال/);
+    assert.match(response.payload.content, /إعادة الاتصال \/ <bdi lang="en">Reconnect<\/bdi>/);
     assert.ok(completed.states.some(s => s.state === 'connecting'));
     assert.match(completed.failure.reason, /Client ID/);
     assert.equal(child.exitCode, null, 'Reconnect must keep the same native process alive');

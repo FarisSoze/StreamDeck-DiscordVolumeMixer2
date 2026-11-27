@@ -17,7 +17,7 @@ void DVMAction::buildPropertyInspector(QStreamDeckPropertyInspectorBuilder &b) {
 	    "<section class=\"dvm-connection\" dir=\"rtl\" aria-label=\"اتصال Discord\">"
 	    "<strong id=\"discordConnectionLabel\" role=\"status\" aria-live=\"polite\">%1</strong>"
 	    "<p id=\"discordConnectionReason\"%2>%3</p>"
-	    "<button id=\"discordReconnect\" type=\"button\" onclick=\"reconnectDiscord()\"%4>إعادة الاتصال</button>"
+	    "<button id=\"discordReconnect\" type=\"button\" onclick=\"reconnectDiscord()\"%4>إعادة الاتصال / <bdi lang=\"en\">Reconnect</bdi></button>"
 	    "</section>")
 	    .arg(label, plugin()->connectionReason().isEmpty() ? " hidden" : "",
 	         plugin()->connectionReason().toHtmlEscaped(), state == "connecting" ? " disabled" : ""));

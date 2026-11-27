@@ -1,8 +1,8 @@
 # Maintenance fork
 
-This fork maintains Danol's Discord Volume Mixer. Version **2.0.1.11** adds live
+This fork maintains Danol's Discord Volume Mixer. Version **2.0.1.12** includes live
 Arabic connection status and an explanation when connection fails, with a
-reconnect button at the top of the inspector. Reconnecting keeps Stream Deck
+**إعادة الاتصال / Reconnect** button at the top of the inspector. Reconnecting keeps Stream Deck
 running, preserves settings, and prevents overlapping attempts. Status updates
 do not rebuild the form or interrupt editing.
 

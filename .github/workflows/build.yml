@@ -39,9 +39,9 @@ jobs:
       - name: Package plugin
         shell: pwsh
         run: |
-          Compress-Archive -Path bin/Release/cz.danol.discordmixer.sdPlugin -DestinationPath DiscordVolumeMixer-2.0.1.11.zip
+          Compress-Archive -Path bin/Release/cz.danol.discordmixer.sdPlugin -DestinationPath DiscordVolumeMixer-2.0.1.12.zip
       - uses: actions/upload-artifact@v4
         with:
-          name: DiscordVolumeMixer-2.0.1.11-windows
-          path: DiscordVolumeMixer-2.0.1.11.zip
+          name: DiscordVolumeMixer-2.0.1.12-windows
+          path: DiscordVolumeMixer-2.0.1.12.zip
           if-no-files-found: error
