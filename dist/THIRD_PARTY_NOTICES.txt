@@ -1,0 +1,26 @@
+Voice Mixer Plus — FIX
+Maintained by FarisSoze. A modified community fork of Discord Volume Mixer.
+
+Original plugin: Danol (CZDanol)
+https://github.com/CZDanol/StreamDeck-DiscordVolumeMixer2
+License: GPL-3.0. See LICENSE.md.
+Corresponding source and modifications:
+https://github.com/FarisSoze/StreamDeck-DiscordVolumeMixer2
+
+QtStreamDeck2 and QtDiscordIPC: Danol / CZDanol, GPL-3.0.
+Their source, pinned upstream commits and modifications are documented in the
+deps/ folders of the source repository. Original copyright notices are retained.
+
+Qt 6.2.4 runtime libraries are dynamically linked.
+Qt licensing information: https://www.qt.io/licensing/open-source-lgpl-obligations
+Qt source: https://download.qt.io/archive/qt/6.2/6.2.4/single/
+Qt LGPLv3 text: https://www.gnu.org/licenses/lgpl-3.0.html
+Qt third-party license notices: https://doc.qt.io/qt-6/licenses-used-in-qt.html
+
+OpenSSL runtime libraries: The OpenSSL Project.
+License and acknowledgements: https://www.openssl.org/source/license.html
+
+The replacement mixer and action icon artwork in this distribution was created
+for the FarisSoze maintenance fork. Original Icons8 artwork is not redistributed
+in this package. Discord is a trademark of Discord Inc.; this project is not
+affiliated with, endorsed by, or an official product of Discord or Elgato.

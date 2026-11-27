@@ -1,4 +1,23 @@
-# Maintenance fork
+# Voice Mixer Plus — FIX
+
+Independent, free, GPL-3.0 community maintenance fork of Danol's Discord Volume
+Mixer, published by FarisSoze. Marketplace namespace:
+`com.farissoze.voicemixerfix`. First independent release: **1.0.0**.
+
+Includes per-person voice volume and mute controls, Stream Deck+ dial support,
+startup-device and inspector fixes, cached-session authentication, and live
+connection status with an **إعادة الاتصال / Reconnect** button.
+
+**[Setup guide / شرح الإعداد](docs/SETUP.md)** ·
+**[Privacy and local storage](docs/PRIVACY.md)** ·
+**[Report a problem](https://github.com/FarisSoze/StreamDeck-DiscordVolumeMixer2/issues)**
+
+The independent package installs alongside the original. It does not update
+Danol's Marketplace listing or convert existing original actions. Original
+attribution and GPL license are retained. Replacement icon artwork belongs to
+this maintenance fork; the original Icons8 assets are not shipped.
+
+## Earlier compatibility builds
 
 This fork maintains Danol's Discord Volume Mixer. Version **2.0.1.12** includes live
 Arabic connection status and an explanation when connection fails, with a
@@ -16,7 +35,8 @@ from startup information, and repeated lifecycle events preserve their actions.
 OAuth requests have a transfer timeout,
 and overlapping connection attempts are blocked while a handshake is running.
 
-The original actions, UUIDs, profiles, credentials, and dial controls are kept.
+The earlier 2.0.1.x compatibility builds retained the original UUIDs. The new
+independent distribution uses its own UUIDs, profiles and local settings.
 The two Qt helper libraries are vendored at their original pinned commits;
 their `UPSTREAM.txt` files record provenance and modifications.
 

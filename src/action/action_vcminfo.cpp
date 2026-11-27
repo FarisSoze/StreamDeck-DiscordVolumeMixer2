@@ -123,7 +123,7 @@ void Action_VCMInfo::update_encoder() {
 			p.drawImage(0, 0, avatar.scaled(48, 48, Qt::KeepAspectRatio, Qt::SmoothTransformation));
 		}
 		else if(vcmp) {
-			static const QImage avatarPlaceholder = QImage("icons/icons8_user_72px.png").scaled(48, 48, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+			static const QImage avatarPlaceholder = QImage("icons/user.png").scaled(48, 48, Qt::KeepAspectRatio, Qt::SmoothTransformation);
 			p.drawImage(0, 0, avatarPlaceholder);
 		}
 

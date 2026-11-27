@@ -23,7 +23,7 @@ void DVMAction::buildPropertyInspector(QStreamDeckPropertyInspectorBuilder &b) {
 	         plugin()->connectionReason().toHtmlEscaped(), state == "connecting" ? " disabled" : ""));
 	b.addSection("Discord settings");
 	b.addLineEdit("client_id", "Client ID").linkWithGlobalSetting();
-	b.addLineEdit("client_secret", "Client secret").linkWithGlobalSetting();
+	b.addLineEdit("client_secret", "Client secret").setProperty("type", "password").setProperty("autocomplete", "off").linkWithGlobalSetting();
 	b.addMessage("For configuration instructions, see the <a href=\"javascript: openUrl('https://github.com/CZDanol/StreamDeck-DiscordVolumeMixer2');\">GitHub page</a>.");
 }
 

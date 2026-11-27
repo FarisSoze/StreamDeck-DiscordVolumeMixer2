@@ -14,9 +14,7 @@ struct QStreamDeckPropertyInspectorItems {
 
 protected:
 	static inline QString escapeQuotes(const QString &str) {
-		QString s = str;
-		s.replace("\"", "\\\"");
-		return s;
+		return str.toHtmlEscaped();
 	}
 
 	struct Item {
@@ -202,7 +200,7 @@ public:
 
 		void buildHTML(QString &sink) const override {
 			buildPre(sink);
-			sink += QStringLiteral("<input type=\"text\" class=\"sdpi-item-value\" oninput=\"notifyValueChanged(this.name, this.value)\"");
+			sink += QStringLiteral("<input class=\"sdpi-item-value\" oninput=\"notifyValueChanged(this.name, this.value)\"");
 			sink += QStringLiteral(" value=\"%1\"").arg(escapeQuotes(this->value.toString()));
 			this->buildProperties(sink);
 			sink += ">";
