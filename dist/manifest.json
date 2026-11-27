@@ -35,14 +35,14 @@
           "ShowTitle": true,
           "TitleAlignment": "middle",
           "FontFamily": "Verdana",
-          "FontSize": "8"
+          "FontSize": 8
         },
         {
           "Image": "icons/noicon",
           "ShowTitle": true,
           "TitleAlignment": "middle",
           "FontFamily": "Verdana",
-          "FontSize": "8"
+          "FontSize": 8
         }
       ],
       "Controllers": [
@@ -104,14 +104,14 @@
           "ShowTitle": true,
           "TitleAlignment": "top",
           "FontFamily": "Verdana",
-          "FontSize": "8"
+          "FontSize": 8
         },
         {
           "Image": "icons/noicon",
           "ShowTitle": true,
           "TitleAlignment": "top",
           "FontFamily": "Verdana",
-          "FontSize": "8"
+          "FontSize": 8
         }
       ],
       "UserTitleEnabled": false,
@@ -128,14 +128,14 @@
           "ShowTitle": true,
           "TitleAlignment": "top",
           "FontFamily": "Verdana",
-          "FontSize": "8"
+          "FontSize": 8
         },
         {
           "Image": "icons/noicon",
           "ShowTitle": true,
           "TitleAlignment": "top",
           "FontFamily": "Verdana",
-          "FontSize": "8"
+          "FontSize": 8
         }
       ],
       "UserTitleEnabled": false,
@@ -191,28 +191,23 @@
   "Profiles": [
     {
       "Name": "Voice Mixer Plus FIX",
-      "DeviceType": 0,
-      "ReadOnly": false
+      "DeviceType": 0
     },
     {
       "Name": "Voice Mixer Plus FIX",
-      "DeviceType": 3,
-      "ReadOnly": false
+      "DeviceType": 3
     },
     {
       "Name": "Voice Mixer Plus FIX XL",
-      "DeviceType": 2,
-      "ReadOnly": false
+      "DeviceType": 2
     },
     {
       "Name": "Voice Mixer Plus FIX Mini",
-      "DeviceType": 1,
-      "ReadOnly": false
+      "DeviceType": 1
     },
     {
       "Name": "Voice Mixer Plus FIX+",
-      "DeviceType": 7,
-      "ReadOnly": false
+      "DeviceType": 7
     }
   ],
   "OS": [
@@ -223,5 +218,7 @@
   ],
   "Software": {
     "MinimumVersion": "6.4"
-  }
+  },
+  "UUID": "com.farissoze.voicemixerfix",
+  "CodePath": "bin/streamdeck-discordmixer.exe"
 }
