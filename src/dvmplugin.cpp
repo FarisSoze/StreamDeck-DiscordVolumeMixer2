@@ -1,6 +1,7 @@
 #include "dvmplugin.h"
 
 #include "dvmdevice.h"
+#include <QScopedValueRollback>
 
 #include "action/action_openmixer.h"
 #include "action/action_vcminfo.h"
@@ -50,8 +51,11 @@ DVMPlugin::~DVMPlugin() {
 }
 
 void DVMPlugin::connectToDiscord() {
-	if(discord.isConnected())
+	if(discord.isConnected() || discordConnectionInProgress_)
 		return;
+	// OAuth uses a nested event loop. Timer ticks and key presses must not
+	// start another handshake on the same IPC socket while it is in progress.
+	QScopedValueRollback<bool> connecting(discordConnectionInProgress_, true);
 
 	if(discord.connect(globalSetting("client_id").toString(), globalSetting("client_secret").toString())) {
 		// Subscribe to voice channel select event

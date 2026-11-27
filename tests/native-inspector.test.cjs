@@ -1,0 +1,46 @@
+const { test } = require('node:test');
+const assert = require('node:assert/strict');
+const { spawn } = require('node:child_process');
+const { mkdtemp, rm } = require('node:fs/promises');
+const { join } = require('node:path');
+const { tmpdir } = require('node:os');
+const { WebSocketServer } = require('ws');
+
+test('native plugin returns an inspector body without propertyInspectorDidAppear', {
+    skip: !process.env.DVM_TEST_EXECUTABLE, timeout: 20000,
+}, async t => {
+    const server = new WebSocketServer({ port: 0 });
+    await new Promise(resolve => server.once('listening', resolve));
+    const cwd = await mkdtemp(join(tmpdir(), 'dvm-protocol-'));
+    let child;
+    t.after(async () => {
+        child?.kill();
+        for (const client of server.clients) client.terminate();
+        await new Promise(resolve => server.close(resolve));
+        await rm(cwd, { recursive: true, force: true });
+    });
+    const result = new Promise((resolve, reject) => {
+        server.once('connection', socket => {
+            const send = object => socket.send(JSON.stringify(object));
+            socket.on('message', data => {
+                const message = JSON.parse(data);
+                if (message.event === 'registerPlugin') {
+                    send({ event: 'deviceDidConnect', device: 'test-device', deviceInfo: { type: 7, size: { columns: 4, rows: 2 } } });
+                    send({ event: 'willAppear', device: 'test-device', context: 'test-action', action: 'cz.danol.discordmixer.openmixer', payload: { settings: {}, controller: 'Keypad', coordinates: { column: 0, row: 0 } } });
+                    // Deliberately omit propertyInspectorDidAppear. This request
+                    // must recover the body even when that notification is lost.
+                    send({ event: 'sendToPlugin', context: 'test-action', action: 'cz.danol.discordmixer.openmixer', payload: { cmd: 'requestPropertyInspector' } });
+                }
+                if (message.event === 'sendToPropertyInspector') resolve(message);
+            });
+        });
+        child = spawn(process.env.DVM_TEST_EXECUTABLE, ['-port', String(server.address().port), '-pluginUUID', 'test-plugin', '-registerEvent', 'registerPlugin', '-info', '{}'], { cwd, windowsHide: true });
+        child.once('error', reject);
+        child.once('exit', code => reject(Error(`Plugin exited before replying: ${code}`)));
+    });
+    const response = await result;
+    assert.equal(response.context, 'test-action');
+    assert.equal(response.payload.cmd, 'updateBody');
+    assert.match(response.payload.content, /Discord settings/);
+    assert.match(response.payload.content, /client_id/);
+});

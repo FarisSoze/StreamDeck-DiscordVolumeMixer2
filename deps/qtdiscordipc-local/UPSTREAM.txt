@@ -1,0 +1,7 @@
+Vendored from https://github.com/CZDanol/QtDiscordIPC
+Commit: e6c889160775eca164babcebdafa4289694dd80f
+License: GPL-3.0 (see LICENSE.md)
+
+Local connection changes: try cached access token before refreshing over the
+network, bound OAuth request transfer stalls, and omit OAuth request secrets
+from diagnostics. The rest of the IPC implementation remains upstream.

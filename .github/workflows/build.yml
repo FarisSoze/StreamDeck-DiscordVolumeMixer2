@@ -1,0 +1,45 @@
+name: Build and test Windows plugin
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  windows:
+    runs-on: windows-2022
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci
+      - run: npm test
+      - uses: jurplel/install-qt-action@v4
+        with:
+          version: '6.2.4'
+          arch: win64_msvc2019_64
+          modules: qtwebsockets
+          cache: true
+      - name: Configure
+        run: cmake -S . -B build -A x64 -DCMAKE_BUILD_TYPE=Release
+      - name: Build
+        run: cmake --build build --config Release --parallel
+      - name: Deploy runtime
+        run: cmake --install build --config Release
+      - name: Native protocol regression test
+        shell: pwsh
+        run: |
+          $env:DVM_TEST_EXECUTABLE = (Resolve-Path 'bin/Release/cz.danol.discordmixer.sdPlugin/bin/streamdeck-discordmixer.exe').Path
+          node --test tests/native-inspector.test.cjs
+      - name: Package plugin
+        shell: pwsh
+        run: |
+          Compress-Archive -Path bin/Release/cz.danol.discordmixer.sdPlugin -DestinationPath DiscordVolumeMixer-2.0.1.10.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: DiscordVolumeMixer-2.0.1.10-windows
+          path: DiscordVolumeMixer-2.0.1.10.zip
+          if-no-files-found: error

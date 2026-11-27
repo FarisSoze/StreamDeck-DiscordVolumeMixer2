@@ -1,0 +1,6 @@
+{
+  "name": "discord-volume-mixer-recovery-tests",
+  "private": true,
+  "scripts": { "test": "node --test tests/*.test.cjs" },
+  "devDependencies": { "ws": "8.23.0" }
+}

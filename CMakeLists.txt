@@ -26,6 +26,8 @@ else ()
 endif ()
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${target_directory}/bin")
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE "${target_directory}/bin")
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG "${target_directory}/bin")
 qt_add_executable(${target})
 target_link_libraries(${target} PRIVATE Qt6::WebSockets Qt6::Network Qt6::Gui)
 target_compile_definitions(${target} PRIVATE QT_DISABLE_DEPRECATED_BEFORE=0x060200)
@@ -40,16 +42,16 @@ target_include_directories(${target} PRIVATE "${PROJECT_SOURCE_DIR}/src")
 # ===========================================
 # QtStreamDeck
 # ===========================================
-file(GLOB_RECURSE streamdeckplugin_files CONFIGURE_DEPENDS "${PROJECT_SOURCE_DIR}/deps/qtstreamdeck2/*.cpp")
+file(GLOB_RECURSE streamdeckplugin_files CONFIGURE_DEPENDS "${PROJECT_SOURCE_DIR}/deps/qtstreamdeck2-local/*.cpp")
 target_sources(${target} PRIVATE ${streamdeckplugin_files})
-target_include_directories(${target} PRIVATE "${PROJECT_SOURCE_DIR}/deps/qtstreamdeck2")
+target_include_directories(${target} PRIVATE "${PROJECT_SOURCE_DIR}/deps/qtstreamdeck2-local")
 
 # ===========================================
 # QtDiscord
 # ===========================================
-file(GLOB_RECURSE discordipc_files CONFIGURE_DEPENDS "${PROJECT_SOURCE_DIR}/deps/qtdiscordipc/*.cpp")
+file(GLOB_RECURSE discordipc_files CONFIGURE_DEPENDS "${PROJECT_SOURCE_DIR}/deps/qtdiscordipc-local/*.cpp")
 target_sources(${target} PRIVATE ${discordipc_files})
-target_include_directories(${target} PRIVATE "${PROJECT_SOURCE_DIR}/deps/qtdiscordipc")
+target_include_directories(${target} PRIVATE "${PROJECT_SOURCE_DIR}/deps/qtdiscordipc-local")
 
 # ===========================================
 # Deployment
@@ -57,7 +59,7 @@ target_include_directories(${target} PRIVATE "${PROJECT_SOURCE_DIR}/deps/qtdisco
 
 # Copy files from dist
 install(DIRECTORY "${PROJECT_SOURCE_DIR}/dist/" DESTINATION ${target_directory})
-install(DIRECTORY "${PROJECT_SOURCE_DIR}/deps/qtstreamdeck2/dist/" DESTINATION ${target_directory})
+install(DIRECTORY "${PROJECT_SOURCE_DIR}/deps/qtstreamdeck2-local/dist/" DESTINATION ${target_directory})
 
 # Run windeployqt
 get_target_property(QMAKE_FILEPATH Qt6::qmake IMPORTED_LOCATION)

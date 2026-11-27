@@ -1,3 +1,6 @@
 /build/
 /bin/
 .idea/
+/deps/qtstreamdeck2/
+/deps/qtdiscordipc/
+/node_modules/

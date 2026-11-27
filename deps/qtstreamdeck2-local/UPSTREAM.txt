@@ -1,0 +1,8 @@
+Vendored from https://github.com/CZDanol/QtStreamDeck2
+Commit: efe5ba014b34a7cfdf99cbbd29d92ac739117f2e
+License: GPL-3.0 (see LICENSE.md)
+
+This fork vendors the previously pinned submodule so that the native inspector
+request handler and matching browser script ship together. Local changes:
+explicit inspector-body requests, retry delays, socket reconnection, safe
+message dispatch, and connection status text. Other files are unchanged.

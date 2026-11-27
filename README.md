@@ -1,4 +1,26 @@
-# Development ended
+# Maintenance fork
+
+This fork maintains Danol's Discord Volume Mixer. Version **2.0.1.10** fixes
+the property inspector getting stuck at `Loading property inspector...` and
+avoids refreshing a valid Discord access token on every reconnect.
+
+The inspector now explicitly requests its settings, retries missing responses,
+and reconnects its Stream Deck socket. OAuth requests have a transfer timeout,
+and overlapping connection attempts are blocked while a handshake is running.
+
+The original actions, UUIDs, profiles, credentials, and dial controls are kept.
+The two Qt helper libraries are vendored at their original pinned commits;
+their `UPSTREAM.txt` files record provenance and modifications.
+
+Run `npm ci` and `npm test` for inspector recovery tests. The Windows workflow
+also compiles the native plugin, deploys Qt, tests recovery without an initial
+inspector appearance event, and produces a plugin ZIP. Installation requires
+closing Stream Deck and backing up the existing plugin folder before replacing
+it. Do not put `discordOauth.json`, credentials, or diagnostic logs in this repo.
+
+## Original project documentation
+
+The original maintainer ended development. The original documentation follows.
 
 # Stream Deck Discord Volume Mixer
 **Version 2 is not yet officially released on the marketplace (it's in the testing phase for now). You can however download it manually from the releases section in this repository.**

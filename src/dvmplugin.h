@@ -55,6 +55,7 @@ private slots:
 	void onStreamDeckEventReceived(const QStreamDeckEvent &e);
 
 private:
+	bool discordConnectionInProgress_ = false;
 	QTimer discordConnectTimeoutTimer_;
 	QTimer discordReconnectTimer_;
 
