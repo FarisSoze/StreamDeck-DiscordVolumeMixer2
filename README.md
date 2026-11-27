@@ -5,7 +5,9 @@ the property inspector getting stuck at `Loading property inspector...` and
 avoids refreshing a valid Discord access token on every reconnect.
 
 The inspector now explicitly requests its settings, retries missing responses,
-and reconnects its Stream Deck socket. OAuth requests have a transfer timeout,
+and reconnects its Stream Deck socket. Already-connected devices are initialized
+from startup information, and repeated lifecycle events preserve their actions.
+OAuth requests have a transfer timeout,
 and overlapping connection attempts are blocked while a handshake is running.
 
 The original actions, UUIDs, profiles, credentials, and dial controls are kept.

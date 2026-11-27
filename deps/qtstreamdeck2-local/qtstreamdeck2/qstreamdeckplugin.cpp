@@ -6,6 +6,7 @@
 #include <QMetaEnum>
 #include <QBuffer>
 #include <QImage>
+#include <QJsonArray>
 
 #include "qstreamdeckdevice.h"
 #include "qstreamdeckaction.h"
@@ -61,6 +62,20 @@ void QStreamDeckPlugin::init(const QString &pluginUID, QCoreApplication &app) {
 		pluginUUID_ = cmdParser.value(pluginuuidOption);
 		registerEvent_ = cmdParser.value(registerEventOption);
 		info_ = cmdParser.value(infoOption);
+	}
+
+	// Devices already connected when the plugin starts are supplied in -info.
+	// Stream Deck need not emit deviceDidConnect for them again. Seed them before
+	// registration so the first willAppear can create and register its action.
+	const auto startupDevices = QJsonDocument::fromJson(info_.toUtf8()).object()["devices"].toArray();
+	for(const auto &entry: startupDevices) {
+		const QJsonObject deviceInfo = entry.toObject();
+		const QString deviceID = deviceInfo["id"].toString();
+		if(deviceID.isEmpty() || devices_.contains(deviceID))
+			continue;
+		auto device = std::unique_ptr<QStreamDeckDevice>(createDevice());
+		device->init(this, deviceID, deviceInfo);
+		devices_.insert_or_assign(deviceID, std::move(device));
 	}
 
 	// Setup global settings
@@ -126,6 +141,12 @@ void QStreamDeckPlugin::onWebSocketTextMessageReceived(const QString &text) {
 }
 
 void QStreamDeckPlugin::onSoftwareMessageReceived(const QJsonObject &message) {
+	// Log routing metadata only; never inspector HTML, settings, or credentials.
+	qDebug() << "Stream Deck event" << message["event"].toString()
+	         << "context" << message["context"].toString()
+	         << "device" << message["device"].toString()
+	         << "known actions" << actions_.size()
+	         << "known devices" << devices_.size();
 	if(const QStreamDeckEvent e = QStreamDeckEvent::fromMessage(message); e.eventType != QStreamDeckEvent::EventType::unknown)
 		emit eventReceived(e);
 }
@@ -139,6 +160,10 @@ void QStreamDeckPlugin::onEventReceived(const QStreamDeckEvent &e) {
 	switch(e.eventType) {
 
 		case ET::deviceDidConnect: {
+			// A duplicate announcement for a startup device must not discard its
+			// existing actions while their inspectors are open.
+			if(devices_.contains(deviceContext))
+				return;
 			auto device = std::unique_ptr<QStreamDeckDevice>(createDevice());
 			device->init(this, deviceContext, e.json["deviceInfo"].toObject());
 			devices_.insert_or_assign(deviceContext, std::move(device));

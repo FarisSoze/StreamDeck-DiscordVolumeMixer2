@@ -6,7 +6,7 @@ const { join } = require('node:path');
 const { tmpdir } = require('node:os');
 const { WebSocketServer } = require('ws');
 
-test('native plugin returns an inspector body without propertyInspectorDidAppear', {
+test('native plugin handles startup devices and repeated lifecycle events without an inspector appearance event', {
     skip: !process.env.DVM_TEST_EXECUTABLE, timeout: 20000,
 }, async t => {
     const server = new WebSocketServer({ port: 0 });
@@ -25,8 +25,10 @@ test('native plugin returns an inspector body without propertyInspectorDidAppear
             socket.on('message', data => {
                 const message = JSON.parse(data);
                 if (message.event === 'registerPlugin') {
-                    send({ event: 'deviceDidConnect', device: 'test-device', deviceInfo: { type: 7, size: { columns: 4, rows: 2 } } });
+                    // No deviceDidConnect: this already-connected device was
+                    // supplied in the startup info, as on the real Stream Deck.
                     send({ event: 'willAppear', device: 'test-device', context: 'test-action', action: 'cz.danol.discordmixer.openmixer', payload: { settings: {}, controller: 'Keypad', coordinates: { column: 0, row: 0 } } });
+                    send({ event: 'deviceDidConnect', device: 'test-device', deviceInfo: { type: 7, size: { columns: 4, rows: 2 } } });
                     // Stream Deck can announce an already visible action again
                     // during profile restoration. The old action's destructor
                     // must not remove the replacement from the context lookup.
@@ -38,7 +40,8 @@ test('native plugin returns an inspector body without propertyInspectorDidAppear
                 if (message.event === 'sendToPropertyInspector') resolve(message);
             });
         });
-        child = spawn(process.env.DVM_TEST_EXECUTABLE, ['-port', String(server.address().port), '-pluginUUID', 'test-plugin', '-registerEvent', 'registerPlugin', '-info', '{}'], { cwd, windowsHide: true });
+        const startupInfo = { devices: [{ id: 'test-device', type: 7, size: { columns: 4, rows: 2 } }] };
+        child = spawn(process.env.DVM_TEST_EXECUTABLE, ['-port', String(server.address().port), '-pluginUUID', 'test-plugin', '-registerEvent', 'registerPlugin', '-info', JSON.stringify(startupInfo)], { cwd, windowsHide: true });
         child.once('error', reject);
         child.once('exit', code => reject(Error(`Plugin exited before replying: ${code}`)));
     });

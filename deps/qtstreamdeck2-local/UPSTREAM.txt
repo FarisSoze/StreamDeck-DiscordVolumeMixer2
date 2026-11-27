@@ -5,4 +5,7 @@ License: GPL-3.0 (see LICENSE)
 This fork vendors the previously pinned submodule so that the native inspector
 request handler and matching browser script ship together. Local changes:
 explicit inspector-body requests, retry delays, socket reconnection, safe
-message dispatch, and connection status text. Other files are unchanged.
+message dispatch, connection status text, startup-device initialization, and
+preserving action registrations across repeated lifecycle notifications.
+Diagnostics record routing metadata without settings or HTML payloads.
+Other files are unchanged.
