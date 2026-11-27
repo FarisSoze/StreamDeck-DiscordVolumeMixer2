@@ -1,5 +1,20 @@
 # Discord Voice Mixer FIX
 
+## Download / التحميل
+
+**[Update the original / older plugin — تحديث النسخة القديمة](https://github.com/FarisSoze/StreamDeck-DiscordVolumeMixer2/releases/latest/download/Discord-Voice-Mixer-FIX-Update-2.0.1.13.streamDeckPlugin)**
+
+**[Install the independent edition — تثبيت النسخة المستقلة](https://github.com/FarisSoze/StreamDeck-DiscordVolumeMixer2/releases/latest/download/Discord-Voice-Mixer-FIX-Standalone-1.0.0.1.streamDeckPlugin)**
+
+Download the appropriate installer and double-click it. The update installer
+keeps the original action identifiers for existing buttons/profiles. The
+independent installer uses its own identifiers and installs alongside the
+original. See [Releases](https://github.com/FarisSoze/StreamDeck-DiscordVolumeMixer2/releases/latest)
+for requirements and source links.
+
+حمّل ملف التحديث إذا عندك الإضافة الأصلية أو نسختنا القديمة، ثم افتحه ووافق
+على التحديث في Stream Deck. ملف النسخة المستقلة مخصص للتثبيت المنفصل.
+
 Independent, free, GPL-3.0 community maintenance fork of Danol's Discord Volume
 Mixer, published by FarisSoze. Marketplace namespace:
 `com.farissoze.discordvoicemixerfix`. First independent release: **1.0.0**.
