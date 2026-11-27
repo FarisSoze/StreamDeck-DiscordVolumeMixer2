@@ -7,7 +7,7 @@ m=json.loads((dist/'manifest.json').read_text(encoding='utf-8'))
 prefix='com.farissoze.voicemixerfix'
 assert m['Author']=='FarisSoze'
 assert m['Name']=='Voice Mixer Plus — FIX'
-assert m['Software']['MinimumVersion']=='6.4'
+assert m['Software']['MinimumVersion']=='6.9'
 actions={a['UUID'] for a in m['Actions']}
 assert all(x.startswith(prefix+'.') for x in actions)
 for profile in m['Profiles']:

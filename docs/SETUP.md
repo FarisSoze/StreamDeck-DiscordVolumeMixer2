@@ -1,6 +1,6 @@
 # Set up Voice Mixer Plus — FIX
 
-Windows 10/11 x64, desktop Discord, and Stream Deck 6.4 or later are required.
+Windows 10/11 x64, desktop Discord, and Stream Deck 6.9 or later are required.
 Stream Deck+ dials are supported. This is an independent community fork and
 installs alongside Danol's original plugin; existing original actions are not
 automatically replaced.

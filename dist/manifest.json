@@ -178,7 +178,7 @@
       "UUID": "com.farissoze.voicemixerfix.deafen"
     }
   ],
-  "SDKVersion": 2,
+  "SDKVersion": 3,
   "Author": "FarisSoze",
   "CodePathWin": "bin/streamdeck-discordmixer.exe",
   "Description": "Community-maintained Discord voice mixer based on Danol's open-source plugin. Per-person volume, mute controls and Stream Deck+ dials, with startup fixes, live connection status and reconnect. Original code: Danol. Maintained by FarisSoze. GPL-3.0.",
@@ -217,7 +217,7 @@
     }
   ],
   "Software": {
-    "MinimumVersion": "6.4"
+    "MinimumVersion": "6.9"
   },
   "UUID": "com.farissoze.voicemixerfix",
   "CodePath": "bin/streamdeck-discordmixer.exe"
