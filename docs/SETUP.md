@@ -1,4 +1,4 @@
-# Set up Voice Mixer Plus — FIX
+# Set up Discord Voice Mixer FIX
 
 Windows 10/11 x64, desktop Discord, and Stream Deck 6.9 or later are required.
 Stream Deck+ dials are supported. This is an independent community fork and
@@ -6,7 +6,7 @@ installs alongside Danol's original plugin; existing original actions are not
 automatically replaced.
 
 1. Install the `.streamDeckPlugin` package, then add **Open Voice Mixer** from
-   **Voice Mixer Plus — FIX** to a key.
+   **Discord Voice Mixer FIX** to a key.
 2. Open https://discord.com/developers/applications and create an application
    using the same account as your desktop Discord client. Use a name such as
    **Voice Mixer**; avoid naming the application “Discord”. This is a personal

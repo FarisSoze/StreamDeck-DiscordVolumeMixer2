@@ -29,21 +29,21 @@ test('native plugin handles startup devices and repeated lifecycle events withou
                 if (message.event === 'registerPlugin') {
                     // No deviceDidConnect: this already-connected device was
                     // supplied in the startup info, as on the real Stream Deck.
-                    send({ event: 'willAppear', device: 'test-device', context: 'test-action', action: 'com.farissoze.voicemixerfix.openmixer', payload: { settings: {}, controller: 'Keypad', coordinates: { column: 0, row: 0 } } });
+                    send({ event: 'willAppear', device: 'test-device', context: 'test-action', action: 'com.farissoze.discordvoicemixerfix.openmixer', payload: { settings: {}, controller: 'Keypad', coordinates: { column: 0, row: 0 } } });
                     send({ event: 'deviceDidConnect', device: 'test-device', deviceInfo: { type: 7, size: { columns: 4, rows: 2 } } });
                     // Stream Deck can announce an already visible action again
                     // during profile restoration. The old action's destructor
                     // must not remove the replacement from the context lookup.
-                    send({ event: 'willAppear', device: 'test-device', context: 'test-action', action: 'com.farissoze.voicemixerfix.openmixer', payload: { settings: {}, controller: 'Keypad', coordinates: { column: 0, row: 0 } } });
+                    send({ event: 'willAppear', device: 'test-device', context: 'test-action', action: 'com.farissoze.discordvoicemixerfix.openmixer', payload: { settings: {}, controller: 'Keypad', coordinates: { column: 0, row: 0 } } });
                     // Deliberately omit propertyInspectorDidAppear. This request
                     // must recover the body even when that notification is lost.
-                    send({ event: 'sendToPlugin', context: 'test-action', action: 'com.farissoze.voicemixerfix.openmixer', payload: { cmd: 'requestPropertyInspector' } });
+                    send({ event: 'sendToPlugin', context: 'test-action', action: 'com.farissoze.discordvoicemixerfix.openmixer', payload: { cmd: 'requestPropertyInspector' } });
                 }
                 if (message.event === 'sendToPropertyInspector' && message.payload.cmd === 'updateBody' && !inspectorBody) {
                     inspectorBody = message;
-                    send({ event: 'sendToPlugin', context: 'test-action', action: 'com.farissoze.voicemixerfix.openmixer', payload: { cmd: 'reconnectDiscord' } });
+                    send({ event: 'sendToPlugin', context: 'test-action', action: 'com.farissoze.discordvoicemixerfix.openmixer', payload: { cmd: 'reconnectDiscord' } });
                     // A double click must not start overlapping handshakes.
-                    send({ event: 'sendToPlugin', context: 'test-action', action: 'com.farissoze.voicemixerfix.openmixer', payload: { cmd: 'reconnectDiscord' } });
+                    send({ event: 'sendToPlugin', context: 'test-action', action: 'com.farissoze.discordvoicemixerfix.openmixer', payload: { cmd: 'reconnectDiscord' } });
                 }
                 if (inspectorBody && message.event === 'sendToPropertyInspector' && message.payload.cmd === 'updateDiscordConnection') {
                     states.push(message.payload);

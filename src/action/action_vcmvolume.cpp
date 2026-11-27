@@ -35,7 +35,7 @@ void Action_VCMVolume::buildPropertyInspector(QStreamDeckPropertyInspectorBuilde
 }
 
 void Action_VCMVolume::onInitialized() {
-	isVolumeDown_ = (actionUID() == "com.farissoze.voicemixerfix.volumedown");
+	isVolumeDown_ = (actionUID() == "com.farissoze.discordvoicemixerfix.volumedown");
 }
 
 void Action_VCMVolume::onPressed() {

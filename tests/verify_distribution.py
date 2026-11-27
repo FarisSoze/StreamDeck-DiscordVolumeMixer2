@@ -4,9 +4,9 @@ from pathlib import Path
 root=Path(__file__).resolve().parents[1]
 dist=root/'dist'
 m=json.loads((dist/'manifest.json').read_text(encoding='utf-8'))
-prefix='com.farissoze.voicemixerfix'
+prefix='com.farissoze.discordvoicemixerfix'
 assert m['Author']=='FarisSoze'
-assert m['Name']=='Voice Mixer Plus — FIX'
+assert m['Name']=='Discord Voice Mixer FIX'
 assert m['Software']['MinimumVersion']=='6.9'
 actions={a['UUID'] for a in m['Actions']}
 assert all(x.startswith(prefix+'.') for x in actions)

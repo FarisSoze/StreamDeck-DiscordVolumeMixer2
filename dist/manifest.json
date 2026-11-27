@@ -12,7 +12,7 @@
       "SupportedInMultiActions": false,
       "Tooltip": "Opens a mixer for Discord voice chat",
       "PropertyInspectorPath": "qtstreamdeck2/propertyinspector.html",
-      "UUID": "com.farissoze.voicemixerfix.openmixer"
+      "UUID": "com.farissoze.discordvoicemixerfix.openmixer"
     },
     {
       "Icon": "icons/action-back",
@@ -24,7 +24,7 @@
         }
       ],
       "Tooltip": "Closes the volume mixer",
-      "UUID": "com.farissoze.voicemixerfix.back"
+      "UUID": "com.farissoze.discordvoicemixerfix.back"
     },
     {
       "Icon": "icons/action-user",
@@ -59,7 +59,7 @@
       "UserTitleEnabled": false,
       "PropertyInspectorPath": "qtstreamdeck2/propertyinspector.html",
       "Tooltip": "Shows user avatar, status, volume.",
-      "UUID": "com.farissoze.voicemixerfix.user"
+      "UUID": "com.farissoze.discordvoicemixerfix.user"
     },
     {
       "Icon": "icons/action-plus",
@@ -76,7 +76,7 @@
       ],
       "PropertyInspectorPath": "qtstreamdeck2/propertyinspector.html",
       "Tooltip": "Increase volume",
-      "UUID": "com.farissoze.voicemixerfix.volumeup"
+      "UUID": "com.farissoze.discordvoicemixerfix.volumeup"
     },
     {
       "Icon": "icons/action-minus",
@@ -93,7 +93,7 @@
       ],
       "PropertyInspectorPath": "qtstreamdeck2/propertyinspector.html",
       "Tooltip": "Decrease volume",
-      "UUID": "com.farissoze.voicemixerfix.volumedown"
+      "UUID": "com.farissoze.discordvoicemixerfix.volumedown"
     },
     {
       "Icon": "icons/action-next",
@@ -117,7 +117,7 @@
       "UserTitleEnabled": false,
       "Tooltip": "Next page",
       "PropertyInspectorPath": "qtstreamdeck2/propertyinspector.html",
-      "UUID": "com.farissoze.voicemixerfix.nextpage"
+      "UUID": "com.farissoze.discordvoicemixerfix.nextpage"
     },
     {
       "Icon": "icons/action-previous",
@@ -141,7 +141,7 @@
       "UserTitleEnabled": false,
       "Tooltip": "Previous page",
       "PropertyInspectorPath": "qtstreamdeck2/propertyinspector.html",
-      "UUID": "com.farissoze.voicemixerfix.previouspage"
+      "UUID": "com.farissoze.discordvoicemixerfix.previouspage"
     },
     {
       "Icon": "icons/action-microphone-muted",
@@ -158,7 +158,7 @@
       ],
       "Tooltip": "Mute/unmute microphone",
       "PropertyInspectorPath": "qtstreamdeck2/propertyinspector.html",
-      "UUID": "com.farissoze.voicemixerfix.microphone"
+      "UUID": "com.farissoze.discordvoicemixerfix.microphone"
     },
     {
       "Icon": "icons/action-speaker-muted",
@@ -175,38 +175,38 @@
       ],
       "Tooltip": "Mute/unmute audio (deafen)",
       "PropertyInspectorPath": "qtstreamdeck2/propertyinspector.html",
-      "UUID": "com.farissoze.voicemixerfix.deafen"
+      "UUID": "com.farissoze.discordvoicemixerfix.deafen"
     }
   ],
   "SDKVersion": 3,
   "Author": "FarisSoze",
   "CodePathWin": "bin/streamdeck-discordmixer.exe",
   "Description": "Community-maintained Discord voice mixer based on Danol's open-source plugin. Per-person volume, mute controls and Stream Deck+ dials, with startup fixes, live connection status and reconnect. Original code: Danol. Maintained by FarisSoze. GPL-3.0.",
-  "Category": "Voice Mixer Plus — FIX",
+  "Category": "Discord Voice Mixer FIX",
   "CategoryIcon": "icons/category",
-  "Name": "Voice Mixer Plus — FIX",
+  "Name": "Discord Voice Mixer FIX",
   "Icon": "icons/plugin",
   "URL": "https://github.com/FarisSoze/StreamDeck-DiscordVolumeMixer2",
   "Version": "1.0.0.1",
   "Profiles": [
     {
-      "Name": "Voice Mixer Plus FIX",
+      "Name": "Discord Voice Mixer FIX",
       "DeviceType": 0
     },
     {
-      "Name": "Voice Mixer Plus FIX",
+      "Name": "Discord Voice Mixer FIX",
       "DeviceType": 3
     },
     {
-      "Name": "Voice Mixer Plus FIX XL",
+      "Name": "Discord Voice Mixer FIX XL",
       "DeviceType": 2
     },
     {
-      "Name": "Voice Mixer Plus FIX Mini",
+      "Name": "Discord Voice Mixer FIX Mini",
       "DeviceType": 1
     },
     {
-      "Name": "Voice Mixer Plus FIX+",
+      "Name": "Discord Voice Mixer FIX+",
       "DeviceType": 7
     }
   ],
@@ -219,6 +219,6 @@
   "Software": {
     "MinimumVersion": "6.9"
   },
-  "UUID": "com.farissoze.voicemixerfix",
+  "UUID": "com.farissoze.discordvoicemixerfix",
   "CodePath": "bin/streamdeck-discordmixer.exe"
 }

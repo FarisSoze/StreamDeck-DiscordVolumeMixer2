@@ -1,8 +1,8 @@
-# Voice Mixer Plus — FIX
+# Discord Voice Mixer FIX
 
 Independent, free, GPL-3.0 community maintenance fork of Danol's Discord Volume
 Mixer, published by FarisSoze. Marketplace namespace:
-`com.farissoze.voicemixerfix`. First independent release: **1.0.0**.
+`com.farissoze.discordvoicemixerfix`. First independent release: **1.0.0**.
 
 Includes per-person voice volume and mute controls, Stream Deck+ dial support,
 startup-device and inspector fixes, cached-session authentication, and live

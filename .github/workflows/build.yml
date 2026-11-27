@@ -33,16 +33,16 @@ jobs:
       - name: Native protocol regression test
         shell: pwsh
         run: |
-          $env:DVM_TEST_EXECUTABLE = (Resolve-Path 'bin/Release/com.farissoze.voicemixerfix.sdPlugin/bin/streamdeck-discordmixer.exe').Path
+          $env:DVM_TEST_EXECUTABLE = (Resolve-Path 'bin/Release/com.farissoze.discordvoicemixerfix.sdPlugin/bin/streamdeck-discordmixer.exe').Path
           $env:DVM_AUTH_PROBE = (Resolve-Path 'build/tests/qdiscord-auth-probe.exe').Path
           $env:PATH = (Split-Path $env:DVM_TEST_EXECUTABLE) + ';' + $env:PATH
           npm test
       - name: Package plugin
         shell: pwsh
         run: |
-          Compress-Archive -Path bin/Release/com.farissoze.voicemixerfix.sdPlugin -DestinationPath VoiceMixerPlus-FIX-1.0.0.1.zip
+          Compress-Archive -Path bin/Release/com.farissoze.discordvoicemixerfix.sdPlugin -DestinationPath DiscordVoiceMixer-FIX-1.0.0.1.zip
       - uses: actions/upload-artifact@v4
         with:
-          name: VoiceMixerPlus-FIX-1.0.0.1-windows
-          path: VoiceMixerPlus-FIX-1.0.0.1.zip
+          name: DiscordVoiceMixer-FIX-1.0.0.1-windows
+          path: DiscordVoiceMixer-FIX-1.0.0.1.zip
           if-no-files-found: error

@@ -1,6 +1,6 @@
 # Privacy and local storage
 
-Voice Mixer Plus — FIX runs locally and connects to the desktop Discord client
+Discord Voice Mixer FIX runs locally and connects to the desktop Discord client
 using Discord IPC. Discord OAuth requests go to Discord; avatars are fetched
 from Discord's CDN. No FarisSoze server, analytics, or telemetry is used.
 

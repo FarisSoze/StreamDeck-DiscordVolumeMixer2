@@ -21,9 +21,9 @@ set(CMAKE_AUTOMOC ON)
 
 if (BUILD_IN_STREAMDECK_PLUGINS_DIR)
     file(TO_CMAKE_PATH "$ENV{APPDATA}" appdata_path)
-    set(target_directory "${appdata_path}/Elgato/StreamDeck/Plugins/com.farissoze.voicemixerfix.sdPlugin")
+    set(target_directory "${appdata_path}/Elgato/StreamDeck/Plugins/com.farissoze.discordvoicemixerfix.sdPlugin")
 else ()
-    set(target_directory "${PROJECT_SOURCE_DIR}/bin/${CMAKE_BUILD_TYPE}/com.farissoze.voicemixerfix.sdPlugin")
+    set(target_directory "${PROJECT_SOURCE_DIR}/bin/${CMAKE_BUILD_TYPE}/com.farissoze.discordvoicemixerfix.sdPlugin")
 endif ()
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${target_directory}/bin")

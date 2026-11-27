@@ -1,4 +1,4 @@
-Voice Mixer Plus — FIX
+Discord Voice Mixer FIX
 Maintained by FarisSoze. A modified community fork of Discord Volume Mixer.
 
 Original plugin: Danol (CZDanol)

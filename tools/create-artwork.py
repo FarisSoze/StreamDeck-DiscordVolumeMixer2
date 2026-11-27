@@ -55,7 +55,7 @@ def font(n,bold=False):return ImageFont.truetype('C:/Windows/Fonts/segoeuib.ttf'
 def canvas(title,sub):
     im=Image.new('RGB',(1920,960),bg); d=ImageDraw.Draw(im)
     im.paste(glyph('plugin',90,brand=True),(110,72),glyph('plugin',90,brand=True))
-    d.text((224,91),'FarisSoze  /  Voice Mixer Plus — FIX',font=font(28),fill=muted)
+    d.text((224,91),'FarisSoze  /  Discord Voice Mixer FIX',font=font(28),fill=muted)
     d.text((110,205),title,font=font(86,True),fill=ink)
     d.text((114,325),sub,font=font(32),fill=muted)
     d.line((110,864,1810,864),fill='#34463e',width=2)

@@ -37,7 +37,7 @@ int main(int argc, char *argv[]) {
 	qDebug() << QDateTime::currentDateTime().toString() << "Plugin starting";
 
 	DVMPlugin plugin;
-	plugin.init("com.farissoze.voicemixerfix", app);
+	plugin.init("com.farissoze.discordvoicemixerfix", app);
 
 	return QGuiApplication::exec();
 }
