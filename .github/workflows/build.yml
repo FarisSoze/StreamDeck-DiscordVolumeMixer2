@@ -24,7 +24,7 @@ jobs:
           modules: qtwebsockets
           cache: true
       - name: Configure
-        run: cmake -S . -B build -A x64 -DCMAKE_BUILD_TYPE=Release
+        run: cmake -S . -B build -A x64 -DCMAKE_BUILD_TYPE=Release -DBUILD_RECOVERY_TESTS=ON
       - name: Build
         run: cmake --build build --config Release --parallel
       - name: Deploy runtime
@@ -33,7 +33,9 @@ jobs:
         shell: pwsh
         run: |
           $env:DVM_TEST_EXECUTABLE = (Resolve-Path 'bin/Release/cz.danol.discordmixer.sdPlugin/bin/streamdeck-discordmixer.exe').Path
-          node --test tests/native-inspector.test.cjs
+          $env:DVM_AUTH_PROBE = (Resolve-Path 'build/tests/qdiscord-auth-probe.exe').Path
+          $env:PATH = (Split-Path $env:DVM_TEST_EXECUTABLE) + ';' + $env:PATH
+          npm test
       - name: Package plugin
         shell: pwsh
         run: |

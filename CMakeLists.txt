@@ -53,6 +53,15 @@ file(GLOB_RECURSE discordipc_files CONFIGURE_DEPENDS "${PROJECT_SOURCE_DIR}/deps
 target_sources(${target} PRIVATE ${discordipc_files})
 target_include_directories(${target} PRIVATE "${PROJECT_SOURCE_DIR}/deps/qtdiscordipc-local")
 
+option(BUILD_RECOVERY_TESTS "Build the isolated cached-authentication probe" OFF)
+if(BUILD_RECOVERY_TESTS)
+    qt_add_executable(qdiscord-auth-probe tests/native-auth-client.cpp ${discordipc_files})
+    target_include_directories(qdiscord-auth-probe PRIVATE "${PROJECT_SOURCE_DIR}/deps/qtdiscordipc-local")
+    target_link_libraries(qdiscord-auth-probe PRIVATE Qt6::Network Qt6::Gui)
+    set_target_properties(qdiscord-auth-probe PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY_RELEASE "${CMAKE_BINARY_DIR}/tests")
+endif()
+
 # ===========================================
 # Deployment
 # ===========================================
