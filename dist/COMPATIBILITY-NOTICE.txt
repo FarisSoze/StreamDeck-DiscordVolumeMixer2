@@ -1,0 +1,11 @@
+Discord Voice Mixer FIX — compatibility edition 2.0.1.13
+
+Original plugin by Danol. Maintenance fixes by FarisSoze. GPL-3.0.
+This edition intentionally retains cz.danol.discordmixer so it can update the
+original plugin in place. It is an unofficial community build, not an update
+published by Danol. Existing profiles and user settings are retained.
+Source: https://github.com/FarisSoze/StreamDeck-DiscordVolumeMixer2/tree/fix/compat-github-link
+Original artwork: Icons8, https://icons8.com
+Qt licensing: https://www.qt.io/licensing/open-source-lgpl-obligations
+Qt source: https://download.qt.io/archive/qt/6.2/6.2.4/single/
+OpenSSL: https://www.openssl.org/source/license.html

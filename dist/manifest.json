@@ -2,7 +2,7 @@
   "Actions": [
     {
       "Icon": "icons/icons8_discord_new_72px",
-      "Name": "Discord Volume Mixer",
+      "Name": "Discord Voice Mixer FIX",
       "States": [
         {
           "Image": "icons/icons8_discord_new_72px",
@@ -35,14 +35,14 @@
           "ShowTitle": true,
           "TitleAlignment": "middle",
           "FontFamily": "Verdana",
-          "FontSize": "8"
+          "FontSize": 8
         },
         {
           "Image": "icons/noicon",
           "ShowTitle": true,
           "TitleAlignment": "middle",
           "FontFamily": "Verdana",
-          "FontSize": "8"
+          "FontSize": 8
         }
       ],
       "Controllers": [
@@ -104,14 +104,14 @@
           "ShowTitle": true,
           "TitleAlignment": "top",
           "FontFamily": "Verdana",
-          "FontSize": "8"
+          "FontSize": 8
         },
         {
           "Image": "icons/noicon",
           "ShowTitle": true,
           "TitleAlignment": "top",
           "FontFamily": "Verdana",
-          "FontSize": "8"
+          "FontSize": 8
         }
       ],
       "UserTitleEnabled": false,
@@ -128,14 +128,14 @@
           "ShowTitle": true,
           "TitleAlignment": "top",
           "FontFamily": "Verdana",
-          "FontSize": "8"
+          "FontSize": 8
         },
         {
           "Image": "icons/noicon",
           "ShowTitle": true,
           "TitleAlignment": "top",
           "FontFamily": "Verdana",
-          "FontSize": "8"
+          "FontSize": 8
         }
       ],
       "UserTitleEnabled": false,
@@ -179,40 +179,35 @@
     }
   ],
   "SDKVersion": 2,
-  "Author": "Danol",
+  "Author": "FarisSoze",
   "CodePathWin": "bin/streamdeck-discordmixer.exe",
-  "Description": "Provides a mixer for Discord voice chat that allows adjusting volume for individual users.\nThis application uses Icons8 icons (https://icons8.com)",
-  "Category": "Discord Volume Mixer",
+  "Description": "Compatibility update by FarisSoze for the original Discord Volume Mixer identifier. Original code by Danol, GPL-3.0. Original Icons8 artwork: https://icons8.com. Preserves existing actions and settings.",
+  "Category": "Discord Voice Mixer FIX",
   "CategoryIcon": "icons/icons8_discord_new_72px",
-  "Name": "Discord Volume Mixer",
+  "Name": "Discord Voice Mixer FIX",
   "Icon": "icons/icons8_discord_new_72px",
   "URL": "https://github.com/FarisSoze/StreamDeck-DiscordVolumeMixer2",
   "Version": "2.0.1.13",
   "Profiles": [
     {
       "Name": "Discord Volume Mixer",
-      "DeviceType": 0,
-      "ReadOnly": false
+      "DeviceType": 0
     },
     {
       "Name": "Discord Volume Mixer",
-      "DeviceType": 3,
-      "ReadOnly": false
+      "DeviceType": 3
     },
     {
       "Name": "Discord Volume Mixer XL",
-      "DeviceType": 2,
-      "ReadOnly": false
+      "DeviceType": 2
     },
     {
       "Name": "Discord Volume Mixer Mini",
-      "DeviceType": 1,
-      "ReadOnly": false
+      "DeviceType": 1
     },
     {
       "Name": "Discord Volume Mixer+",
-      "DeviceType": 7,
-      "ReadOnly": false
+      "DeviceType": 7
     }
   ],
   "OS": [
@@ -222,6 +217,8 @@
     }
   ],
   "Software": {
-    "MinimumVersion": "6.1"
-  }
+    "MinimumVersion": "6.4"
+  },
+  "UUID": "cz.danol.discordmixer",
+  "CodePath": "bin/streamdeck-discordmixer.exe"
 }
